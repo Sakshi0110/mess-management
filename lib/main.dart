@@ -13,38 +13,51 @@ class MyApp extends StatelessWidget {
           centerTitle: true,
           backgroundColor: Colors.deepOrangeAccent,
         ),
-        body: Image(
-          image: AssetImage('assets/cook_1.png'),
-        ),
-        //image: NetworkImage('https://w1.pngwing.com/pngs/14/27/png-transparent-chef-cooking-restaurant-food-cookbook-pleased-gesture-chief-cook-thumbnail.png'),),
-        //child: Container(
-        //Text("Hi there, null!! Here's your food routine for the day",
-        //TextStyle(
-        //Colors.black,
-        //fontSize: 30,
-
-        //),)
-
-        drawer: Drawer(
-          child: ListView(padding: EdgeInsets.zero, children: const <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.deepOrangeAccent,
-                shape: BoxShape.rectangle,
-              ),
-
-              //body: Center(
-              child: const Center(
+        body: Column(children: <Widget>[
+          Row(children: <Widget>[
+            Expanded(
+              child: Container(
+                padding: EdgeInsets.all(20.0),
                 child: Text(
-                  'MessMate Panel',
-                  //textAlign: TextAlign.center,
-
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20.0,
-                  ),
+                  'Hi there, Sakshi!',
+                  style: Theme.of(context).textTheme.headline4,
                 ),
               ),
+            ),
+            Align(
+              child: Image(
+                height: 175.0,
+                width: 175.0,
+                image: AssetImage('assets/cook_1.png'),
+              ),
+              alignment: Alignment.topRight,
+            ),
+          ]),
+          Container(
+              padding: EdgeInsets.symmetric(vertical: 30.0, horizontal: 10.0),
+              child: Text(
+                'Your food schedule for the day!',
+                style: Theme.of(context).textTheme.headline6,
+              ))
+        ]),
+        drawer: Drawer(
+          child: ListView(padding: EdgeInsets.zero, children: <Widget>[
+            //Container(
+            //height:100.0,
+            //child:
+            DrawerHeader(
+              //padding: EdgeInsets.all(0.0),
+              decoration: BoxDecoration(
+                color: Colors.deepOrangeAccent,
+                image: DecorationImage(
+                  image: AssetImage('assets/covered_tray.png'),
+                  fit: BoxFit.fill,
+                ),
+
+                //color: Colors.deepOrangeAccent,
+                shape: BoxShape.rectangle,
+              ),
+              child: Text(''),
             ),
             ListTile(
               leading: Icon(Icons.home),
