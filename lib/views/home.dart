@@ -1,3 +1,5 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:messmate/views/drawer.dart';
 
@@ -7,8 +9,12 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final db = FirebaseDatabase.instance.reference();
+  final Future<FirebaseApp> _future = Firebase.initializeApp();
+
   @override
   Widget build(BuildContext context) {
+    db.child('food').once().then((result) => print('result = $result'));
     return Scaffold(
       appBar: AppBar(
         title: Text('MessMate',
@@ -59,17 +65,17 @@ class _HomeState extends State<Home> {
             ),
             ListTile(
               title:
-                  Text('Lunch', style: TextStyle(fontWeight: FontWeight.bold)),
+              Text('Lunch', style: TextStyle(fontWeight: FontWeight.bold)),
               subtitle: Text('-----'),
             ),
             ListTile(
               title:
-                  Text('Snacks', style: TextStyle(fontWeight: FontWeight.bold)),
+              Text('Snacks', style: TextStyle(fontWeight: FontWeight.bold)),
               subtitle: Text('-----'),
             ),
             ListTile(
               title:
-                  Text('Dinner', style: TextStyle(fontWeight: FontWeight.bold)),
+              Text('Dinner', style: TextStyle(fontWeight: FontWeight.bold)),
               subtitle: Text('-----'),
             ),
           ]),
