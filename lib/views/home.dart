@@ -1,5 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:messmate/views/drawer.dart';
 
@@ -9,12 +9,12 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final db = FirebaseDatabase.instance.reference();
-  final Future<FirebaseApp> _future = Firebase.initializeApp();
+  FirebaseApp defaultApp = Firebase.app();
+  final db = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
-    db.child('food').once().then((result) => print('result = $result'));
+    db.collection('food').doc('2021-07-25-lunch').get();
     return Scaffold(
       appBar: AppBar(
         title: Text('MessMate',
@@ -61,22 +61,22 @@ class _HomeState extends State<Home> {
             ListTile(
               title: Text('Breakfast',
                   style: TextStyle(fontWeight: FontWeight.bold)),
-              subtitle: Text('Poha'),
+              subtitle: FieldText('2021-07-25-breakfast'),
             ),
             ListTile(
               title:
-              Text('Lunch', style: TextStyle(fontWeight: FontWeight.bold)),
-              subtitle: Text('-----'),
+                  Text('Lunch', style: TextStyle(fontWeight: FontWeight.bold)),
+              subtitle: FieldText('2021-07-25-lunch'),
             ),
             ListTile(
               title:
               Text('Snacks', style: TextStyle(fontWeight: FontWeight.bold)),
-              subtitle: Text('-----'),
+              subtitle: FieldText('2021-07-25-snacks'),
             ),
             ListTile(
               title:
               Text('Dinner', style: TextStyle(fontWeight: FontWeight.bold)),
-              subtitle: Text('-----'),
+              subtitle: FieldText('2021-07-25-dinner'),
             ),
           ]),
         ),
@@ -96,3 +96,39 @@ class _HomeState extends State<Home> {
     );
   }
 }
+
+
+class FieldText extends StatelessWidget {
+  final String documentId;
+
+  FieldText(this.documentId);
+
+  @override
+  Widget build(BuildContext context) {
+    CollectionReference food = FirebaseFirestore.instance.collection('food');
+    return FutureBuilder<DocumentSnapshot>(
+      future: food.doc(documentId).get(),
+      builder:
+          (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+        if (snapshot.hasError) {
+          return Text("Something went wrong");
+        }
+
+        if (snapshot.hasData && !snapshot.data.exists) {
+          return Text("Document does not exist");
+        }
+
+        if (snapshot.connectionState == ConnectionState.done) {
+          Map<String, dynamic> data = snapshot.data.data() as Map<
+              String,
+              dynamic>;
+          return Text(" ${data['menu']} ");
+        }
+
+        return Text("loading");
+      },
+    );
+  }
+}
+
+
