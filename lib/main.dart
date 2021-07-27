@@ -1,9 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:messmate/views/about.dart';
+import 'package:messmate/views/complaints.dart';
 import 'package:messmate/views/home.dart';
 import 'package:messmate/views/loading.dart';
-
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
@@ -35,8 +35,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(initialRoute: "/home", routes: <String, WidgetBuilder>{
       '/home': (BuildContext context) =>
-          firebaseConnected ? Home() : LoadingPage(),
+      firebaseConnected ? Home() : LoadingPage(),
       '/about': (BuildContext context) => new AboutPage(),
+      '/complaints': (BuildContext context) => new ComplaintsPage(),
     });
   }
 }

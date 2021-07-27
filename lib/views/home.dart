@@ -59,22 +59,22 @@ class _HomeState extends State<Home> {
             ListTile(
               title: Text('Breakfast',
                   style: TextStyle(fontWeight: FontWeight.bold)),
-              subtitle: FieldText('2021-07-25-breakfast'),
+              subtitle: FoodText('2021-07-25-breakfast'),
             ),
             ListTile(
               title:
                   Text('Lunch', style: TextStyle(fontWeight: FontWeight.bold)),
-              subtitle: FieldText('2021-07-25-lunch'),
+              subtitle: FoodText('2021-07-25-lunch'),
             ),
             ListTile(
               title:
               Text('Snacks', style: TextStyle(fontWeight: FontWeight.bold)),
-              subtitle: FieldText('2021-07-25-snacks'),
+              subtitle: FoodText('2021-07-25-snacks'),
             ),
             ListTile(
               title:
               Text('Dinner', style: TextStyle(fontWeight: FontWeight.bold)),
-              subtitle: FieldText('2021-07-25-dinner'),
+              subtitle: FoodText('2021-07-25-dinner'),
             ),
           ]),
         ),
@@ -96,10 +96,10 @@ class _HomeState extends State<Home> {
 }
 
 
-class FieldText extends StatelessWidget {
+class FoodText extends StatelessWidget {
   final String documentId;
 
-  FieldText(this.documentId);
+  FoodText(this.documentId);
 
   @override
   Widget build(BuildContext context) {
