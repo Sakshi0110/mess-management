@@ -8,7 +8,7 @@ class ComplaintsPage extends StatefulWidget {
 }
 
 class _ComplaintsPageState extends State<ComplaintsPage> {
-  List<String> complaintsList = [];
+  List<Map<String, dynamic>> complaintsList = [];
 
   @override
   void initState() {
@@ -18,7 +18,12 @@ class _ComplaintsPageState extends State<ComplaintsPage> {
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
         setState(() {
-          complaintsList.add(doc["complaint"]);
+          complaintsList.add({
+            'complaint': doc["complaint"],
+            'request': doc["request"],
+            'username': doc["username"],
+            'time': doc["time"].toDate().toString(),
+          });
         });
       });
     });
@@ -28,22 +33,108 @@ class _ComplaintsPageState extends State<ComplaintsPage> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> cardsList = [];
-    for (String complaint in complaintsList) {
-      cardsList.add(
-        Card(child: Text(complaint)),
-      );
-    }
-
     return Scaffold(
       appBar: AppBar(
-        title: Text('MessMate',
+        title: Text('Issues',
             style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
         centerTitle: true,
         backgroundColor: Colors.deepOrangeAccent,
       ),
       drawer: AppDrawer(),
-      body: Column(children: cardsList),
+      body: ListView.builder(
+        itemCount: complaintsList.length,
+        itemBuilder: (context, index) {
+          final item = complaintsList[index];
+          return Dismissible(
+            child: Card(
+              // shadowColor: Colors.deepOrangeAccent,
+              margin: EdgeInsets.fromLTRB(5.0, 8.0, 5.0, 5.0),
+              color: Colors.grey[100],
+              child: ListTile(
+                contentPadding:
+                EdgeInsets.symmetric(vertical: 0.0, horizontal: 16.0),
+                dense: true,
+                title: Text.rich(TextSpan(
+                    text: item['request'] ? "Request:  " : "Complaint:  ",
+                    style: TextStyle(
+                        color: item['request'] ? Colors.green : Colors.red,
+                        fontSize: 14.0),
+                    children: <InlineSpan>[
+                      TextSpan(
+                        text: item['complaint'],
+                        style: TextStyle(color: Colors.black, fontSize: 14.0),
+                      ),
+                    ])),
+                //subtitle: Text(item['username'], style: TextStyle(fontSize: 11.0),)),
+                subtitle: Text.rich(
+                  TextSpan(
+                    text: item['username'],
+                    style: TextStyle(fontSize: 11.0),
+                    children: <InlineSpan>[
+                      TextSpan(
+                        text: ",  ",
+                        style: TextStyle(fontSize: 11.0),
+                      ),
+                      TextSpan(
+                        text: item['time'],
+                        style: TextStyle(fontSize: 11.0),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            //Text(complaint)),],
+
+            // Specify the direction to swipe and delete
+            direction: DismissDirection.endToStart,
+            key: Key(item['complaint']),
+            onDismissed: (direction) {
+              // Removes that item the list on swipwe
+              setState(() {
+                complaintsList.removeAt(index);
+              });
+              // Shows the information on Snackbar
+              Scaffold.of(context)
+                  .showSnackBar(SnackBar(content: Text("Issue dismissed")));
+            },
+            background: Container(color: Colors.red),
+            //child: ListTile(title: Text('$item')),
+          );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        backgroundColor: Colors.deepOrangeAccent,
+        elevation: 10.0,
+        onPressed: () {
+          return showDialog(
+            context: context,
+            builder: (ctx) =>
+                AlertDialog(
+                  title: Text("Add Issue"),
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                  TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'Your issue:',
+                      labelStyle: TextStyle(color: Colors.grey[900]),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: Text('Add'),
+                    style: ElevatedButton.styleFrom(
+                        primary: Colors.deepOrangeAccent),
+                  ),
+                ],
+
+                  ),
+                ),
+          );
+        },
+      ),
     );
   }
 }

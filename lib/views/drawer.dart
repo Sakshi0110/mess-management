@@ -28,15 +28,11 @@ class AppDrawer extends StatelessWidget {
           title: Text('Search'),
         ),
         ListTile(
-          leading: Icon(Icons.add_to_queue),
-          title: Text('Request'),
-        ),
-        ListTile(
-          leading: Icon(Icons.shopping_cart),
-            title: Text('Complaints Cart'),
+            leading: Icon(Icons.food_bank),
+            title: Text('Issues'),
             onTap: () {
               Navigator.of(context).pop();
-              Navigator.pushReplacementNamed(context, '/complaints');
+              Navigator.pushReplacementNamed(context, '/issues');
             }),
         ListTile(
             leading: Icon(Icons.info),

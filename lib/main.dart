@@ -35,9 +35,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(initialRoute: "/home", routes: <String, WidgetBuilder>{
       '/home': (BuildContext context) =>
-      firebaseConnected ? Home() : LoadingPage(),
+          firebaseConnected ? Home() : LoadingPage(),
       '/about': (BuildContext context) => new AboutPage(),
-      '/complaints': (BuildContext context) => new ComplaintsPage(),
+      '/issues': (BuildContext context) => new ComplaintsPage(),
     });
   }
 }
