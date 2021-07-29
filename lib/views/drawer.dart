@@ -1,21 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:messmate/widgets/gauth.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var header;
+    if (true) {
+      header = UserAccountsDrawerHeader(
+        decoration: BoxDecoration(color: Colors.deepOrangeAccent),
+        accountName: Text('Sakshi Sindhuja' + "  (" + 'Student' + ")"),
+        accountEmail: Text('sakshisindhuja850@gmail.com'),
+        currentAccountPicture: CircleAvatar(
+          backgroundImage: NetworkImage(
+              "https://www.vhv.rs/dpng/d/426-4264903_user-avatar-png-picture-avatar-profile-dummy-transparent.png"),
+        ),
+      );
+    } else {
+      header = DrawerHeader(
+        decoration: BoxDecoration(color: Colors.deepOrangeAccent),
+        child: Padding(
+            padding: EdgeInsets.fromLTRB(16.0, 70.0, 16.0, 16.0),
+            child: GAuthButton()),
+      );
+    }
     return Drawer(
       child: ListView(padding: EdgeInsets.zero, children: <Widget>[
-        DrawerHeader(
-          decoration: BoxDecoration(
-            color: Colors.deepOrangeAccent,
-            image: DecorationImage(
-              image: AssetImage('assets/covered_tray.png'),
-              fit: BoxFit.contain,
-            ),
-            shape: BoxShape.rectangle,
-          ),
-          child: Text(''),
-        ),
+        header,
         ListTile(
             leading: Icon(Icons.home),
             title: Text('Home'),
