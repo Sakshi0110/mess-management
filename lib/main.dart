@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:messmate/views/about.dart';
 import 'package:messmate/views/complaints.dart';
+import 'package:messmate/views/contact.dart';
 import 'package:messmate/views/home.dart';
 import 'package:messmate/views/loading.dart';
 void main() {
@@ -38,6 +39,7 @@ class _MyAppState extends State<MyApp> {
           firebaseConnected ? Home() : LoadingPage(),
       '/about': (BuildContext context) => new AboutPage(),
       '/issues': (BuildContext context) => new ComplaintsPage(),
+      '/contact': (BuildContext context) => new ContactPage(),
     });
   }
 }

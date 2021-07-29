@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:messmate/views/drawer.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 
 class ComplaintsPage extends StatefulWidget {
   @override
@@ -110,28 +111,59 @@ class _ComplaintsPageState extends State<ComplaintsPage> {
         onPressed: () {
           return showDialog(
             context: context,
-            builder: (ctx) =>
-                AlertDialog(
-                  title: Text("Add Issue"),
-                  content: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
+            builder: (ctx) => AlertDialog(
+              title: Text("Add Issue"),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
                   TextFormField(
                     decoration: InputDecoration(
-                      labelText: 'Your issue:',
-                      labelStyle: TextStyle(color: Colors.grey[900]),
+                      hintText: 'Your issue',
                     ),
                   ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: Text('Add'),
-                    style: ElevatedButton.styleFrom(
-                        primary: Colors.deepOrangeAccent),
+                  SizedBox(height: 50.0),
+                  Align(
+                    child: ToggleSwitch(
+                      fontSize: 10.0,
+                      minWidth: 70.0,
+                      minHeight: 30.0,
+                      cornerRadius: 30.0,
+                      activeBgColors: [
+                        [Colors.green],
+                        [Colors.red]
+                      ],
+                      activeFgColor: Colors.white,
+                      inactiveBgColor: Colors.grey,
+                      inactiveFgColor: Colors.white,
+                      initialLabelIndex: 1,
+                      totalSwitches: 2,
+                      labels: ['Request', 'Complaint'],
+                      radiusStyle: true,
+                      onToggle: (index) {},
+                    ),
+                    alignment: Alignment.bottomLeft,
                   ),
+                  SizedBox(height: 30.0),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        TextButton.icon(
+                          style: TextButton.styleFrom(primary: Colors.blueGrey),
+                          icon: Icon(Icons.add_a_photo),
+                          label: Text('Add image',
+                              style: TextStyle(fontSize: 12.0)),
+                          onPressed: () {},
+                        ),
+                        ElevatedButton(
+                          onPressed: () {},
+                          child: Text('Add'),
+                          style: ElevatedButton.styleFrom(
+                              primary: Colors.deepOrangeAccent),
+                        ),
+                      ]),
                 ],
-
-                  ),
-                ),
+              ),
+            ),
           );
         },
       ),

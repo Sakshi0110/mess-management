@@ -48,6 +48,10 @@ class AppDrawer extends StatelessWidget {
         ListTile(
           leading: Icon(Icons.call),
           title: Text('Contact us'),
+          onTap: () {
+            Navigator.of(context).pop();
+            Navigator.pushReplacementNamed(context, '/contact');
+          },
         ),
         ListTile(
           leading: Icon(Icons.people),
