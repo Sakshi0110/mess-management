@@ -1,6 +1,6 @@
 # messmate
 
-Mess Management app
+A mess management app.
 
 ## Getting Started
 

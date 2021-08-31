@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "484764694796",
+    "project_id": "messmate-14e11",
+    "storage_bucket": "messmate-14e11.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:484764694796:android:8c298da78993fbdd4e3129",
+        "android_client_info": {
+          "package_name": "iiit.occamsrazor.messmate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "484764694796-283kd60q2uagtlbhot85hc9nq6ugtf46.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "iiit.occamsrazor.messmate",
+            "certificate_hash": "b3a8755a1beea6cd580f0f1e6d23acb637adc197"
+          }
+        },
+        {
+          "client_id": "484764694796-r00mppqstn1ikgre2k9ksfr19hioiqe5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaobF1HEtukNJlxO9feVlKNG2JevELi0o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "484764694796-r00mppqstn1ikgre2k9ksfr19hioiqe5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
