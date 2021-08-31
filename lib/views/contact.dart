@@ -23,14 +23,33 @@ class _ContactPageState extends State<ContactPage> {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             ListTile(
+              leading: CircleAvatar(
+                backgroundImage: NetworkImage(
+                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVqtZcXq3lIHrkWbuDpxztFr_Fs1OUxekwoQ&usqp=CAU",
+                ),
+              ),
               title: Text('HOD'),
               subtitle: Text('1234567890'),
+              trailing: IconButton(
+                icon: Icon(Icons.call_outlined, color: Colors.blueGrey),
+                onPressed: () {},
+              ),
               dense: true,
             ),
-            Divider(height: 60.0, color: Colors.grey),
+            SizedBox(height: 20.0),
+            //Divider(height: 60.0, color: Colors.grey),
             ListTile(
+                leading: CircleAvatar(
+                  backgroundImage: NetworkImage(
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbhXtL2Dc5PEUCBJhZHtbRl04Kur3ns_HHsg&usqp=CAU",
+                  ),
+                ),
                 title: Text('Warden'),
                 subtitle: Text('2345678901'),
+                trailing: IconButton(
+                  icon: Icon(Icons.call_outlined, color: Colors.blueGrey),
+                  onPressed: () {},
+                ),
                 dense: true),
           ],
         ),
